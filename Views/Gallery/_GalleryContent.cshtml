@@ -1,0 +1,59 @@
+﻿@model xema.ViewModels.GalleryViewModel
+
+<div id="gallery-grid"
+     class="row g-4 gallery-grid">
+
+    @foreach (var tattoo in Model.Tattoos)
+    {
+        <div class="col-lg-3 col-md-6 gallery-grid-item">
+
+            <div class="gallery-item"
+                 data-bs-toggle="modal"
+                 data-bs-target="#tattooModal"
+                 data-title="@tattoo.Title"
+                 data-category="@tattoo.Category?.Name"
+                 data-description="@tattoo.Description"
+                 data-image="@tattoo.Media.Url">
+
+                <img src="@tattoo.Media.Url"
+                     class="gallery-image"
+                     alt="@tattoo.Title"
+                     loading="lazy" />
+
+            </div>
+
+        </div>
+    }
+
+</div>
+
+
+@if (Model.TotalPages > 1)
+{
+    <nav aria-label="Gallery pagination">
+
+        <ul class="pagination justify-content-center">
+
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+
+                    <a href="@Url.Action("Index", "Gallery", new
+                       {
+                           category = Model.SelectedCategory,
+                           page = i
+                       })"
+                       class="page-link gallery-page-link"
+                       data-page="@i">
+
+                        @i
+
+                    </a>
+
+                </li>
+            }
+
+        </ul>
+
+    </nav>
+}

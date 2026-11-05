@@ -1,0 +1,67 @@
+﻿@model xema.ViewModels.HeroBannerFormViewModel
+
+@{
+    ViewData["Title"] = "Edit Hero Banner";
+}
+
+<h1>Edit Hero Banner</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit" asp-route-id="@Model.Id">
+
+            <input type="hidden" asp-for="Id" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="Heading" class="form-label"></label>
+                <input asp-for="Heading" class="form-control" />
+                <span asp-validation-for="Heading" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Subheading" class="form-label"></label>
+                <textarea asp-for="Subheading" class="form-control"></textarea>
+                <span asp-validation-for="Subheading" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ButtonText" class="form-label"></label>
+                <input asp-for="ButtonText" class="form-control" />
+                <span asp-validation-for="ButtonText" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ButtonLink" class="form-label"></label>
+                <input asp-for="ButtonLink" class="form-control" />
+                <span asp-validation-for="ButtonLink" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ImageUrl" class="form-label"></label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Save Changes
+            </button>
+
+            <a asp-action="Delete"
+               asp-route-id="@Model.Id"
+               class="btn btn-danger">
+                Delete Hero Banner
+            </a>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

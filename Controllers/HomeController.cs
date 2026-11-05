@@ -1,25 +1,44 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using xema.Models;
+using Microsoft.EntityFrameworkCore;
+using xema.Data;
+using xema.ViewModels;
 
-namespace xema.Controllers
+namespace xema.Controllers;
+
+public class HomeController : Controller
 {
-    public class HomeController : Controller
+    private readonly ApplicationDbContext _context;
+
+    public HomeController(ApplicationDbContext context)
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
+        _context = context;
+    }
 
-        public IActionResult Privacy()
+    public async Task<IActionResult> Index()
+    {
+        var model = new HomeViewModel
         {
-            return View();
-        }
+            HeroBanner = await _context.HeroBanners
+                .Include(h => h.Media)
+                .FirstOrDefaultAsync(),
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+            FeaturedImages = await _context.TattooImages
+                .Include(t => t.Media)
+                .Include(t => t.Category)
+                .Where(t => t.IsFeatured)
+                .ToListAsync()
+        };
+
+        return View(model);
+    }
+
+    public IActionResult About()
+    {
+        return View();
+    }
+
+    public IActionResult Contact()
+    {
+        return View();
     }
 }

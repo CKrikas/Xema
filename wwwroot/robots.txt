@@ -1,0 +1,8 @@
+﻿
+User-agent: *
+Allow: /
+
+Disallow: /Admin/
+Disallow: /Identity/
+
+Sitemap: https://xema.gr/sitemap.xml

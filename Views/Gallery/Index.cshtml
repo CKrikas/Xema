@@ -1,0 +1,18 @@
+﻿@model xema.ViewModels.GalleryViewModel
+
+@{
+    ViewData["Title"] = "Tattoo Gallery";
+    ViewData["MetaDescription"] =
+        "Browse tattoo designs and selected work from XEMA Tattoo.";
+}
+
+
+<div class="container">
+    <div id="gallery-section">
+        <div id="gallery-content">
+            @await Html.PartialAsync("_GalleryContent", Model)
+        </div>
+    </div>
+</div>
+
+<partial name="_TattooModal" />

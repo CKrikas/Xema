@@ -3,48 +3,141 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - xema</title>
-    <script type="importmap"></script>
+
+    <title>@ViewData["Title"] - XEMA Tattoo</title>
+    <meta name="description"
+          content="@(ViewData["MetaDescription"] ?? "Explore tattoo designs and featured work by XEMA Tattoo. Get in touch to discuss your next tattoo.")" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="XEMA Tattoo" />
+    <meta property="og:title" content="@ViewData["Title"] - XEMA Tattoo" />
+    <meta property="og:description"
+          content="@(ViewData["MetaDescription"] ?? "Explore tattoo designs and featured work by XEMA Tattoo.")" />
+    <meta property="og:url"
+          content="https://xema.gr@Context.Request.Path" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/xema.styles.css" asp-append-version="true" />
+    <link rel ="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">xema</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - xema - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+<body>
+
+    <header>
+
+        <div class="container-lg">
+
+            <div class="site-brand">
+
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   class="brand-link">
+
+                    <img src="~/images/logo.png"
+                         class="site-logo"
+                         alt="XEMA Tattoo" />
+
+                </a>
+
+            </div>
+
+            <nav class="navbar navbar-expand-lg">
+
+                <button class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbar">
+
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-center"
+                     id="navbar">
+
+                    <ul class="navbar-nav">
+
+                        <li class="nav-item">
+                            <a asp-controller="Home"
+                               asp-action="Index"
+                               class="nav-link">
+                                Home
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a asp-controller="Gallery"
+                               asp-action="Index"
+                               class="nav-link">
+                                Gallery
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a asp-controller="Home"
+                               asp-action="About"
+                               class="nav-link">
+                                About
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a asp-controller="Home"
+                               asp-action="Contact"
+                               class="nav-link">
+                                Contact
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a href="https://www.instagram.com/xema.tattoos/"
+                               target="_blank"
+                               class="nav-link">
+                                Instagram
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </nav>
+
         </div>
-    </footer>
+
+    </header>
+
+    <main class="pt-2 pb-5">
+
+        @RenderBody()
+
+    </main>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+        AOS.init({
+        duration: 600,
+        once: true,
+        offset: 80,
+        easing: "ease-out"
+        });
+    </script>
+
 </body>
 </html>

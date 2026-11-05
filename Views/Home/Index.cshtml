@@ -1,8 +1,136 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model xema.ViewModels.HomeViewModel
+
+@{
+    ViewData["Title"] = "Tattoo Artist in Athens";
+    ViewData["MetaDescription"] =
+        "Explore XEMA Tattoo's featured designs and portfolio. Get in touch to discuss your next tattoo.";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+<!-- Hero -->
+<section class="hero-section">
+
+    @if (Model.HeroBanner != null)
+    {
+        <div class="hero-image-container">
+
+            <img src="@Model.HeroBanner.Media.Url"
+                 class="hero-image"
+                 alt="@Model.HeroBanner.Heading" />
+
+            <div class="hero-content">
+
+                <div class="hero-content-inner"
+                     data-aos="fade">
+
+                    <h1>@Model.HeroBanner.Heading</h1>
+
+                    <p>@Model.HeroBanner.Subheading</p>
+
+                    <a asp-controller="Home"
+                       asp-action="Contact"
+                       class="hero-button">
+
+                        @(string.IsNullOrWhiteSpace(Model.HeroBanner.ButtonText)
+                            ? "Book Now"
+                            : Model.HeroBanner.ButtonText)
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+</section>
+
+
+<!-- Featured Work -->
+<section class="featured-section">
+
+    <div class="container-xl">
+
+        <div class="text-center mb-5"
+             data-aos="fade-up">
+
+            <h2>Featured Work</h2>
+
+            <p class="text-muted">
+                A selection of recent tattoos.
+            </p>
+
+        </div>
+
+        <div class="row g-4 justify-content-center">
+
+            @for (int i = 0; i < Model.FeaturedImages.Count; i++)
+            {
+                var tattoo = Model.FeaturedImages[i];
+
+                <div class="col-xl-3 col-lg-3 col-md-6"
+                     data-aos="fade-up"
+                     data-aos-delay="@((i % 4) * 100)">
+
+                    <div class="gallery-item"
+                         data-bs-toggle="modal"
+                         data-bs-target="#tattooModal"
+                         data-title="@tattoo.Title"
+                         data-category="@tattoo.Category?.Name"
+                         data-description="@tattoo.Description"
+                         data-image="@tattoo.Media.Url">
+
+                        <img src="@tattoo.Media.Url"
+                             class="gallery-image"
+                             alt="@tattoo.Title"
+                             loading="lazy" />
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+        <div class="text-center mt-5">
+
+            <a asp-controller="Gallery"
+               asp-action="Index"
+               class="btn btn-dark px-4">
+
+                View Full Gallery
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Call To Action -->
+<section class="cta-section text-center"
+         data-aos="fade-up">
+
+    <div class="container-xl">
+
+        <h2>Ready for your next tattoo?</h2>
+
+        <p class="text-muted mb-4">
+            Let's create something unique together.
+        </p>
+
+        <a asp-controller="Home"
+           asp-action="Contact"
+           class="btn btn-outline-dark px-4">
+
+            Contact
+
+        </a>
+
+    </div>
+
+</section>
+<partial name="_TattooModal" />

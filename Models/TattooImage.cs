@@ -8,12 +8,16 @@
 
         public string? Description { get; set; }
 
-        public required string ImageUrl { get; set; }
+        public int MediaId { get; set; }
+
+        public Media Media { get; set; } = null!;
 
         public DateTime UploadedAt { get; set; }
 
         public int CategoryId { get; set; }
 
-        public Category? Category { get; set; } //navigation property, 
+        public Category? Category { get; set; } //navigation property 
+
+        public bool IsFeatured { get; set; }
     }
 }
